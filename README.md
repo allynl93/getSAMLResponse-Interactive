@@ -30,3 +30,6 @@ Most MFA solutions used by IDPs will be supported e.g. Push Authentication or OT
 Some forms of MFA will not work, these include FIDO and WebAuthN (FIDO2).
 
 Not tested = PIV smart card auth
+
+### Thanks ###
+Special thanks to Pete Maan for his contributions and his amazing psPAS module. 
