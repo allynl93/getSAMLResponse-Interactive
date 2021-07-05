@@ -15,7 +15,7 @@ Primary use case for creation is the CyberArk PAS API but can be utilised by any
 ### Example: ###
 
 ```
-import-module -name 'C:\PS-SAML-Response.ps1'
+import-module -name 'C:\PS-SAML-Interactive.psm1'
 
 $LoginURL = 'https://myapps.microsoft.com/signin/App1/2aba-4df5-8fc2-cdf9034d7191?tenantId=-d5be-49ea-j988-fdd74c91f8ad'
 
