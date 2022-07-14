@@ -23,6 +23,7 @@ function New-SAMLInteractive{
         $form.Width = 640
         $form.Height = 700
         $form.showIcon = $false
+	$form.Topmost = $true
     
         $web = New-Object Windows.Forms.WebBrowser
         $web.Size = $form.ClientSize
