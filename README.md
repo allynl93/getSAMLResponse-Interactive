@@ -31,5 +31,15 @@ Some forms of MFA will not work, these include FIDO and WebAuthN (FIDO2).
 
 Not tested = PIV smart card auth
 
+### CyberArk PVWA Sign in ###
+Specifically for CyberArk you will need to enable IDP initiated sign in. This can be achieved by completing the following:
+
+1. From the installation folder, open the web.config file for editing.
+2. In the appSettings tag, add the following line:
+
+<add key="EnableIdPInitiatedSso" value="yes"/>
+
+
+
 ### Thanks ###
 Special thanks to Pete Maan for his contributions and his amazing psPAS module. 
