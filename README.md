@@ -37,7 +37,7 @@ Specifically for CyberArk you will need to enable IDP initiated sign in. This ca
 1. From the installation folder, open the web.config file for editing.
 2. In the appSettings tag, add the following line:
 
-<add key="EnableIdPInitiatedSso" value="yes"/>
+\<add key="EnableIdPInitiatedSso" value="yes"\/\>
 
 
 
