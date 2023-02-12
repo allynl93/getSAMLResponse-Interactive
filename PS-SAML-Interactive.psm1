@@ -23,6 +23,7 @@ function New-SAMLInteractive{
         $form.Width = 640
         $form.Height = 700
         $form.showIcon = $false
+        $form.TopMost = $true
     
         $web = New-Object Windows.Forms.WebBrowser
         $web.Size = $form.ClientSize
@@ -32,7 +33,7 @@ function New-SAMLInteractive{
         $form.Controls.Add($web)
 
         $web.Navigate($LoginIDP)
-    
+        
         $web.add_Navigating({
     
             if ($web.DocumentText -match "SAMLResponse"){
@@ -52,7 +53,7 @@ function New-SAMLInteractive{
         })
     
         # show browser window, waits for window to close
-        if($form.ShowDialog() -ne "OK") {
+        if([system.windows.forms.application]::run($form) -ne "OK") {
             
             if ($null -ne $Script:SAMLResponse){
 
