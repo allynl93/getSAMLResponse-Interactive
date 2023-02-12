@@ -20,7 +20,6 @@ Once auth is complete the response if written out to the command line or to the 
 
 ```
 $loginResponse = .\getSAMLResponse.exe $LoginIDP
-
 ```
 
 ### Testing ###
