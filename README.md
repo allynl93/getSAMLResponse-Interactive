@@ -1,45 +1,27 @@
-# PS-SAML-Interactive
+# getSAMLInteractive
 
-A PowerShell module which allows you to interactively authenticate to your SAML IDP, including most MFA options, and return the SAML Response for use in other calls.
+A set of tools which will allow you to interactively authenticate with a SAML IDP, even if MFA is enabled, and retrieve the SAML Response. SAML Response can then be passed to another app or module for authenticating user. 
 
-Primary use case for creation is the CyberArk PAS API but can be utilised by any service that uses a SAML response to authenticate.
+Initially created for psPAS CyberArk module, providing a secure and user-friendly way to authenticate to the CyberArk REST API.
 
-# Usage
+# PowerShell Module
+The PowerShell module located within folder "PowerShell New-SAMLInteractive Module" is the original incarnation of this project. Module continues to work but does have some limitations, as it it uses the built-in Windows web framework. This framework is based on Internet Explorer, so modern authentication methods likesFIDO2 are not possible.
 
-1. Import the module
-2. Pass the login URL for a federated app, typically the URL for an IDP initiated login
-3. Form will open, login to your SAML IDP as normal
-4. SAML Response returned
+# getSAMLResponse Executable (New)
+The latest version of the project. Built from scratch, this version is built on webView2 (Edge web technology) using C#. Using webView2 modern authentication is now possible, allowing users to use Fido keys, such as a YubiKey. Providing stronger and more convenient authentication options.
 
+Source code for this version can be found in folder "webView2 Modern Source".
 
-### Example: ###
+You can also download the pre-built binary. This is built specifically with the CyberArk API in mind, for other apps you will need to download from source and build.
+
+### How to use binary ###
+Like the PS module you simply need to call executable and pass the IDP sign in URL for your app e.g., CyberArk PVWA. 
+Once auth is complete the response if written out to the command line or to the variable assigned.
 
 ```
-import-module -name 'C:\PS-SAML-Interactive.psm1'
+$loginResponse = .\getSAMLResponse.exe $LoginIDP
 
-$LoginURL = 'https://myapps.microsoft.com/signin/App1/2aba-4df5-8fc2-cdf9034d7191?tenantId=-d5be-49ea-j988-fdd74c91f8ad'
-
-New-SAMLInteractive -LoginIDP $LoginURL
 ```
 
-![LoginExample](https://user-images.githubusercontent.com/17259178/124187208-64340a80-dab5-11eb-884b-ef581cf1007c.gif)
-
-
-### MFA ###
-Most MFA solutions used by IDPs will be supported e.g. Push Authentication or OTP.
-Some forms of MFA will not work, these include FIDO and WebAuthN (FIDO2).
-
-Not tested = PIV smart card auth
-
-### CyberArk PVWA Sign in ###
-Specifically for CyberArk you will need to enable IDP initiated sign in. This can be achieved by completing the following:
-
-1. From the installation folder, open the web.config file for editing.
-2. In the appSettings tag, add the following line:
-
-\<add key="EnableIdPInitiatedSso" value="yes"\/\>
-
-
-
-### Thanks ###
-Special thanks to Pete Maan for his contributions and his amazing psPAS module. 
+### Testing ###
+Tested with Okta and Azure AD with CyberArk PAM v12 and v13.
